@@ -16,7 +16,10 @@ export const Home = () => {
 
   return (
     <>
+        <div className="my-0 mx-10">
       <MovieList onSearch={handleSearch} />
+      </div>
+
     </>
   );
 };

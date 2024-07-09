@@ -9,20 +9,7 @@ import MovieCard from "./MovieCard";
 import { getFilteredMovies } from "../utilities/FilteredData.jsx";
 
 export const MovieList = () => {
-  const [searchTerm, setSearchTerm] = useState("");
   const movies = useSelector(getAllMovies);
-
-  //   const handleInputChange = (e) => {
-  //     setSearchTerm(e.target.value);
-  //   };
-
-  //   const handleSearch = () => {
-  //     onSearch(searchTerm);
-  //   };
-
-  // //   const sortByType = useSelector(null);
-
-  //   const favouriteMovies = useSelector(null);
 
   const isLoading = useSelector(getLoaderInfo);
 

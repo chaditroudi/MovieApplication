@@ -6,7 +6,7 @@ function MovieCard({data}) {
   
   return (
     <div className="bg-secondary-color max-w-[210px] mx-auto cursor-pointer transition-all duration-300 hover:scale-105 hover:transition-all hover:duration-300 min-h-[450px] h-full m-[10px]">
-    <Link to={`/movie/${data.imdbID}`}>
+      <Link to={`/movie/${data.imdbID}`}>
       <div>
         {/* Add lazy loading effect for optimisation, faster initial load time and less data traffic */}
         <img

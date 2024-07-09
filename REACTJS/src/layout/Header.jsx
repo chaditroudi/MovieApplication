@@ -10,7 +10,7 @@ export const Header = ({ onSearch }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     onSearch(searchTerm);
   };
 
