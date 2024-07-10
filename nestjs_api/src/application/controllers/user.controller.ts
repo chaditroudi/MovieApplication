@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
+import { User } from 'src/domain/entities/user.schema';
 import { UserService } from '../services/user.service';
-import { User } from '../../entities/user.schema';
 
 @Controller('user')
 export class UserController {
@@ -8,6 +8,6 @@ export class UserController {
 
   @Get(':username')
   async findOne(@Param('username') username: string): Promise<User> {
-    return await this.userService.findOne(username);
+    return await this.userService.findOneByUsername(username);
   }
 }

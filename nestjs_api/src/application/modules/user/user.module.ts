@@ -1,8 +1,10 @@
+import { UserService } from 'src/application/services/user.service';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from '../../../domain/entities/user.schema';
-import { UserService } from 'src/application/services/user.service';
 import { UserController } from 'src/application/controllers/user.controller';
+import { UserRepository } from 'src/domain/repositories/user.repository';
+import { JwtService } from '@nestjs/jwt';
 
 
 @Module({
@@ -14,7 +16,7 @@ import { UserController } from 'src/application/controllers/user.controller';
       },
     ]),
   ],
-  providers: [UserService],
+  providers: [UserService,UserRepository,JwtService],
   exports: [UserService, MongooseModule],
 
   controllers: [UserController],

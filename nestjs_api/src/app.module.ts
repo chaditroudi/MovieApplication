@@ -1,17 +1,17 @@
-import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
-import { APP_GUARD, RouterModule } from '@nestjs/core';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { JwtModule } from '@nestjs/jwt';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthService } from './auth/auth.service';
-import { AuthController } from './auth/auth.controller';
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
-import { MovieModule } from './movie/movie.module';
+import { AuthModule } from './application/modules/auth/auth.module';
+import { UserModule } from './application/modules/user/user.module';
+import { MovieModule } from './application/modules/movies/movie.module';
 import { AuthGuard } from './common/guards/AuthGuard';
-import { LoggerMiddleware } from './logger-middleware';
 import { AuthMiddleware } from './common/middleware/auth.middlewar';
+import { LoggerMiddleware } from './logger-middleware';
+import { APP_GUARD } from '@nestjs/core';
+
 
 @Module({
   imports: [
@@ -19,13 +19,18 @@ import { AuthMiddleware } from './common/middleware/auth.middlewar';
       envFilePath: '.env',
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.MONGODB_URI),
+      MongooseModule.forRoot(process.env.MONGODB_URI),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '24h' },
+      global: true, 
+    }),
+    AuthModule,
     UserModule,
     MovieModule,
-    AuthModule,
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService, {
+  controllers: [AppController],
+  providers: [AppService, {
     provide: APP_GUARD,
     useClass: AuthGuard,
   },
@@ -42,7 +47,7 @@ export class AppModule implements NestModule {
 
     consumer
       .apply(LoggerMiddleware)
-      .forRoutes('movies');
+      .forRoutes('*');
   }
   
 }

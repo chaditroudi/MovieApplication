@@ -1,6 +1,7 @@
 import { IsDateString, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateMovieDto {
+  
   @IsNotEmpty()
   @IsString()
   title: string;
@@ -23,4 +24,7 @@ export class CreateMovieDto {
   description?:string;
 
   genre: string;
+
+  _id?: string;
+
 }

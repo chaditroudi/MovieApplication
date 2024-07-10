@@ -27,6 +27,7 @@ export class AuthMiddleware implements NestMiddleware {
           statusCode: 401,
         });
       } else {
+        console.log(error)
         throw new UnauthorizedException('Invalid token');
       }
     }

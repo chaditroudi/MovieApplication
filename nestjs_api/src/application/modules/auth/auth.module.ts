@@ -1,26 +1,30 @@
 import { Module } from '@nestjs/common';
-import { AuthService } from '../../services/auth.service';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthService } from '../../services/auth.service'; // Adjust path as needed
+import { AuthController } from '../../controllers/auth.controller'; // Adjust path as needed
+import { UserModule } from '../user/user.module'; // Adjust path as needed
+import { AuthRepository } from 'src/domain/repositories/auth.repository';
+import { UserRepository } from 'src/domain/repositories/user.repository';
+import { User } from 'src/domain/entities/user.schema';
 
-import { ConfigModule } from '@nestjs/config';
-import { AuthController } from 'src/application/controllers/auth.controller';
-import { UserModule } from '../user/user.module';
-
-@Module({
-      imports: [
-            UserModule,
-            ConfigModule.forRoot({
-              envFilePath: '.env',
-              isGlobal: true,
-            }),
-            JwtModule.register({
-                  global: true,
-                  secret: process.env.JWT_SECRET ,
-                  signOptions: { expiresIn: '1h' },
-            }),
-      ],
-      providers: [AuthService],
-      controllers: [AuthController],
-      exports: [AuthService],
+  @Module({
+    imports: [
+      UserModule,
+      JwtModule.registerAsync({
+        imports: [ConfigModule],
+        useFactory: async (configService: ConfigService) => {
+          return {
+            secret: configService.get<string>('JWT_SECRET'),
+          };
+        },
+        inject: [ConfigService],
+      }),
+    ],
+  
+  providers: [AuthService, AuthRepository, UserRepository],
+  controllers: [AuthController],
+  exports: [AuthService],
 })
-export class AuthModule { }
+export class AuthModule {}
+

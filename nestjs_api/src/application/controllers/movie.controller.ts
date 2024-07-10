@@ -1,11 +1,12 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { MovieService } from '../services/movie.service';
-import { CreateMovieDto } from '../dto/create-movie.dto';
-import { UpdateMovieDto } from '../dto/update-movie.dto';
+
 import { AuthGuard } from 'src/common/guards/AuthGuard';
+import { CreateMovieDto } from '../dtos/create-movie.dto';
+import { UpdateMovieDto } from '../dtos/update-movie.dto';
 
 @Controller('movies')
-export class MovieController {
+  export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
 

@@ -2,6 +2,9 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
+import { CreateMovieDto } from 'src/application/dtos/create-movie.dto';
+import { Movie } from '../entities/movie.schema';
+import { UpdateMovieDto } from 'src/application/dtos/update-movie.dto';
 
 @Injectable()
 export class MovieRepository {
@@ -39,4 +42,11 @@ export class MovieRepository {
     }
     return movie;
   }
+
+  async deleteMany(conditions: any): Promise<any> {
+    return this.movieModel.deleteMany(conditions).exec();
+  }
+  // async onModuleDestroy() {
+  //   await this.movieModel.connection.close();
+  // }
 }

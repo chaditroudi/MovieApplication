@@ -1,23 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User } from '../../entities/user.schema';
-import { CreateUserDto } from '../../../application/dtos/create-user.dto';
-import * as bcrypt from 'bcrypt';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { User } from 'src/domain/entities/user.schema';
+import { CreateUserDto } from '../dtos/create-user.dto';
+import { UserRepository } from 'src/domain/repositories/user.repository';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
-
-  async findOne(username: string): Promise<User | undefined> {
-    return this.userModel.findOne({ username }).exec();
-  }
+  constructor(private readonly userRepository: UserRepository) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const { username, password } = createUserDto;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new this.userModel({ username, password: hashedPassword });
-    return newUser.save();
+    return this.userRepository.create(createUserDto);
   }
-  
+
+  async findById(userId: string): Promise<User> {
+    const user = await this.userRepository.findById(userId);
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+    return user;
+  }
+
+  async findOneByUsername(username: string): Promise<User> {
+    const user = await this.userRepository.findOneByUsername(username);
+    if (!user) {
+      throw new NotFoundException(`User with username ${username} not found`);
+    }
+    return user;
+  }
 }
