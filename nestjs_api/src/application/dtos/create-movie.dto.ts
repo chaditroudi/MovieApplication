@@ -2,11 +2,11 @@ import { IsDateString, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 
 export class CreateMovieDto {
   
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Title should not be empty' })
   @IsString()
   title: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Year should not be empty' })
   year: string;
 
 

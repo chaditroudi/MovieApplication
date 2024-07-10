@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpStatus, ValidationPipe } from '@nestjs/common';
 import { MovieService } from '../services/movie.service';
 
 import { AuthGuard } from 'src/common/guards/AuthGuard';
@@ -12,8 +12,18 @@ import { UpdateMovieDto } from '../dtos/update-movie.dto';
 
   @UseGuards(AuthGuard)
   @Post()
-  create(@Body() createMovieDto: CreateMovieDto) {
+  create(@Body(ValidationPipe) createMovieDto: CreateMovieDto) {
+    
+    try{
     return this.movieService.create(createMovieDto);
+  } catch (error) {
+    console.log(error);
+    return {
+      statusCode: HttpStatus.BAD_REQUEST,
+      message: error.message,
+    };
+  }
+    
   }
 
   @Get()
@@ -30,7 +40,7 @@ import { UpdateMovieDto } from '../dtos/update-movie.dto';
 
   @Patch(':id')
   @UseGuards(AuthGuard)
-  update(@Param('id') id: string, @Body() updateMovieDto: UpdateMovieDto) {
+  update(@Param('id') id: string, @Body(ValidationPipe) updateMovieDto: UpdateMovieDto) {
     return this.movieService.update(id, updateMovieDto);
   }
 
