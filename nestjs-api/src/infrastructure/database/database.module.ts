@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '../config/config.module'; // Adjust the path as per your project structure
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: '.env',
-    }),
+    ConfigModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -15,8 +14,6 @@ import { MongooseModule } from '@nestjs/mongoose';
       inject: [ConfigService],
     }),
   ],
-  controllers: [],
-  providers: [],
   exports: [MongooseModule],
 })
 export class DatabaseModule {}

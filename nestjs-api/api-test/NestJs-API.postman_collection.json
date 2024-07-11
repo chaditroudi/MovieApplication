@@ -1,0 +1,246 @@
+{
+	"info": {
+		"_postman_id": "1b3b10d2-2e03-4e3b-9071-06bd8d75df32",
+		"name": "NestJs-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16688121"
+	},
+	"item": [
+		{
+			"name": "MOVIE",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjhlNGIzMDEyMTE0MjNiNDEyZGNkNTkiLCJ1c2VybmFtZSI6ImNoYWRpIiwiaWF0IjoxNzIwNjQzMjM3fQ.nQ9NgmoQvTS5PbgNFak_8OLXd6eme_MOCuP8t6-uaPg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"dddq\",\r\n    \"description\":\"osqdkqsokdoqskd\",\r\n    \"rated\":\"\",\r\n    \"year\":\"2020-01-05\",\r\n    \"genre\":\"Drama\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/movies",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjhlNGIzMDEyMTE0MjNiNDEyZGNkNTkiLCJ1c2VybmFtZSI6ImNoYWRpIiwiaWF0IjoxNzIwNjQzMjM3fQ.nQ9NgmoQvTS5PbgNFak_8OLXd6eme_MOCuP8t6-uaPg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"amiiiiiiiiii\",\r\n    \"description\":\"osqdkqsokdoqskd\",\r\n    \"rated\":\"\",\r\n    \"year\":\"2020-01-05\",\r\n    \"genre\":\"Drama\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/movies/668e5eaf777356f92589d6a6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								"668e5eaf777356f92589d6a6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjhlNGIzMDEyMTE0MjNiNDEyZGNkNTkiLCJ1c2VybmFtZSI6ImNoYWRpIiwiaWF0IjoxNzIwNjQzMjM3fQ.nQ9NgmoQvTS5PbgNFak_8OLXd6eme_MOCuP8t6-uaPg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3000/movies",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjhlNGIzMDEyMTE0MjNiNDEyZGNkNTkiLCJ1c2VybmFtZSI6ImNoYWRpIiwiaWF0IjoxNzIwNjQzMjM3fQ.nQ9NgmoQvTS5PbgNFak_8OLXd6eme_MOCuP8t6-uaPg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3000/movies/668e5eaf777356f92589d6a4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								"668e5eaf777356f92589d6a4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjhlNGIzMDEyMTE0MjNiNDEyZGNkNTkiLCJ1c2VybmFtZSI6ImNoYWRpIiwiaWF0IjoxNzIwNjQzMjM3fQ.nQ9NgmoQvTS5PbgNFak_8OLXd6eme_MOCuP8t6-uaPg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3000/movies/668eefca48fa9aab5fde6ea5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								"668eefca48fa9aab5fde6ea5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"chadi\",\r\n    \"password\":\"chadi1A&\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"amine\",\r\n    \"password\":\"chadi1A&\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/auth/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
