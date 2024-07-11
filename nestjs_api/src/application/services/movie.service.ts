@@ -24,7 +24,7 @@ export class MovieService {
     return this.movieRepository.update(id, updateMovieDto);
   }
 
-  async remove(id: string): Promise<Movie> {
+  async remove(id: string): Promise<string> {
     return this.movieRepository.remove(id);
   }
 }

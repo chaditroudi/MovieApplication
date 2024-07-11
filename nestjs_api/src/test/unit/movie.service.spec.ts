@@ -14,7 +14,7 @@ const mockMovieRepository = (): MockType<MovieRepository> => ({
   findAll: jest.fn(),
   findOne: jest.fn(),
   update: jest.fn(),
-  // close:jest.fn(),
+  closeConnection: jest.fn(), 
   deleteMany: jest.fn(),
   remove: jest.fn(),
 });

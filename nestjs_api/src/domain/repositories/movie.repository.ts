@@ -1,14 +1,17 @@
 
-import { InjectModel } from '@nestjs/mongoose';
+import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Connection, Model } from 'mongoose';
 import { CreateMovieDto } from 'src/application/dtos/create-movie.dto';
 import { Movie } from '../entities/movie.schema';
 import { UpdateMovieDto } from 'src/application/dtos/update-movie.dto';
 
 @Injectable()
 export class MovieRepository {
-  constructor(@InjectModel(Movie.name) private movieModel: Model<Movie>) {}
+  constructor(
+    @InjectModel(Movie.name) private movieModel: Model<Movie>,
+    @InjectConnection() private connection: Connection,
+  ) {}
 
   async create(createMovieDto: CreateMovieDto): Promise<Movie> {
     const createMovie = new this.movieModel(createMovieDto);
@@ -35,16 +38,21 @@ export class MovieRepository {
     return existingMovie;
   }
 
-  async remove(id: string): Promise<Movie> {
+  async remove(id: string): Promise<string> {
     const movie = await this.movieModel.findByIdAndDelete(id).exec();
     if (!movie) {
       throw new NotFoundException(`Movie #${id} not found`);
     }
-    return movie;
+      return `Movie #${id} has been successfully deleted`;
+
   }
 
   async deleteMany(conditions: any): Promise<any> {
     return this.movieModel.deleteMany(conditions).exec();
+  }
+
+  async closeConnection(): Promise<void> {
+    await this.connection.close();
   }
   // async onModuleDestroy() {
   //   await this.movieModel.connection.close();
