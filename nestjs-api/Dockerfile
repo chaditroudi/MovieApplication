@@ -24,13 +24,19 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
+
 # Install production dependencies
 RUN npm install --only=production
 
+# Install build dependencies needed for bcrypt
+RUN apk add --no-cache make g++ python3
+
+# Install bcrypt and rebuild it for Alpine Linux
+RUN npm install bcrypt
+
 # Copy the build artifacts and node_modules from the build stage
 COPY --from=build /app/dist ./dist
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/.env ./.env
+COPY --from=build /app/.env ./
 
 # Expose the application port
 EXPOSE 3000
