@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { MovieService } from '../services/movie.service';
 
-import { AuthGuard } from 'src/common/guards/AuthGuard';
+import { AuthGuard } from '../../common/guards/AuthGuard';
 import { CreateMovieDto } from '../dtos/create-movie.dto';
 import { UpdateMovieDto } from '../dtos/update-movie.dto';
 
@@ -60,5 +60,6 @@ export class MovieController {
   async remove(@Param('id') id: string): Promise<{ message: string }> {
     const successMessage = await this.movieService.remove(id);
     return { message: successMessage };
+    
   }
 }

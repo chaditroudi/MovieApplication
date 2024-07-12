@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AuthService } from '../../services/auth.service'; // Adjust path as needed
-import { AuthController } from '../../controllers/auth.controller'; // Adjust path as needed
-import { UserModule } from '../user/user.module'; // Adjust path as needed
-import { AuthRepository } from 'src/domain/repositories/auth.repository';
-import { UserRepository } from 'src/domain/repositories/user.repository';
-import { User } from 'src/domain/entities/user.schema';
+import { AuthService } from '../../services/auth.service'; 
+import { AuthController } from '../../controllers/auth.controller'; 
+import { UserModule } from '../user/user.module'; 
+import { AuthRepository } from '../../../domain/repositories/auth.repository';
+import { UserRepository } from '../../../domain/repositories/user.repository';
 
   @Module({
     imports: [

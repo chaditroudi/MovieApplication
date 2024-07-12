@@ -8,7 +8,6 @@ type MockType<T> = {
   [P in keyof T]: jest.Mock<Promise<any>>;
 };
 
-// Create a mock MovieRepository
 const mockMovieRepository = (): MockType<MovieRepository> => ({
   create: jest.fn(),
   findAll: jest.fn(),

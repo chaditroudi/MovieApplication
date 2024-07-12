@@ -1,9 +1,9 @@
-import { UserService } from 'src/application/services/user.service';
+import { UserService } from '../../../application/services/user.service';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from '../../../domain/entities/user.schema';
-import { UserController } from 'src/application/controllers/user.controller';
-import { UserRepository } from 'src/domain/repositories/user.repository';
+import { UserController } from '../../../application/controllers/user.controller';
+import { UserRepository } from '../../../domain/repositories/user.repository';
 import { JwtService } from '@nestjs/jwt';
 
 

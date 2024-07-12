@@ -1,33 +1,39 @@
-# Use Node.js base image with a specific LTS version
-FROM node:14 AS build
+# Stage 1: Build the application
+FROM node:18 AS build
 
-# Create and set the working directory inside the container
+# Set the working directory inside the container
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Install NestJS dependencies
-RUN npm install --only=production
+# Install all dependencies, including dev dependencies
+RUN npm install
 
-# Copy the rest of the application code to the working directory
+# Copy the entire project to the working directory
 COPY . .
 
-# Build your NestJS application
+# Build the application
 RUN npm run build
 
-# Use a smaller base image for production
-FROM node:14-alpine
+# Stage 2: Create a lightweight image for running the application
+FROM node:18-alpine
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy built files and necessary dependencies from the build stage
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/dist ./dist
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+# Install production dependencies
+RUN npm install --only=production
 
-# Expose port 3000 (or the port your NestJS application runs on)
+# Copy the build artifacts and node_modules from the build stage
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/.env ./.env
+
+# Expose the application port
 EXPOSE 3000
 
-# Command to run your NestJS application
-CMD ["node", "dist/main.js"]
+# Command to run the application
+CMD ["node", "dist/src/main"]

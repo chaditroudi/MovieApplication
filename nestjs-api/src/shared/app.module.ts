@@ -6,11 +6,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './logger-middleware';
 import { APP_GUARD } from '@nestjs/core';
-import { AuthModule } from 'src/application/modules/auth/auth.module';
-import { MovieModule } from 'src/application/modules/movies/movie.module';
-import { UserModule } from 'src/application/modules/user/user.module';
-import { AuthMiddleware } from 'src/common/middleware/auth.middlewar';
-import { AuthGuard } from 'src/common/guards/AuthGuard';
+import { AuthModule } from '../application/modules/auth/auth.module';
+import { MovieModule } from '../application/modules/movies/movie.module';
+import { UserModule } from '../application/modules/user/user.module';
+import { AuthMiddleware } from '../common/middleware/auth.middlewar';
+import { AuthGuard } from '../common/guards/AuthGuard';
 
 
 @Module({
